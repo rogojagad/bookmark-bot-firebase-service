@@ -1,6 +1,6 @@
 const admin = require('firebase-admin');
 
-let serviceAccount = require('./../../bookmark-bot-9cda3-d405096bde01.json');
+let serviceAccount = require('./../../firebase.json');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
