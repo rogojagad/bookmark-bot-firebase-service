@@ -20,3 +20,10 @@ exports.buildCountPerCategoryMetaData = (categories, results) => {
 
     return metaData;
 };
+
+exports.buildDeleteOne = id => {
+    let metaData = Object();
+    metaData.id = id;
+
+    return metaData;
+};

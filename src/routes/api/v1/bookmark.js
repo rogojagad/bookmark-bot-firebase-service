@@ -4,5 +4,6 @@ let bookmarkController = require("../../../controller/BookmarkController");
 
 routes.get("/bookmark", bookmarkController.index);
 routes.post("/bookmark", bookmarkController.storeOne);
+routes.delete("/bookmark", bookmarkController.deleteOne);
 
 module.exports = routes;

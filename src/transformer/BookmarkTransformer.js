@@ -4,8 +4,8 @@ exports.transformGetIndex = (bookmarks, metaData, res) => {
     let responseObj = Object();
     let data = Array();
 
-    for (bookmark of bookmarks) {
-        temp = Object();
+    for (let bookmark of bookmarks) {
+        let temp = Object();
 
         temp.title = bookmark.title;
         temp.description = bookmark.description;
@@ -34,9 +34,20 @@ exports.transformCreateOne = (id, metaData, res) => {
 
 exports.transformGetByCategories = (results, metaData, res) => {
     let responseObj = Object();
-    let data = Object();
 
     responseObj.data = results;
+    responseObj.meta = metaData;
+
+    res.status(responseCollection.ok).json(responseObj);
+};
+
+exports.transformDeleteOne = (metaData, res, status) => {
+    let responseObj = Object();
+    let data = Object();
+
+    data.status = status;
+
+    responseObj.data = data;
     responseObj.meta = metaData;
 
     res.status(responseCollection.ok).json(responseObj);

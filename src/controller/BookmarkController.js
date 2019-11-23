@@ -1,5 +1,6 @@
 const createNewBookmarkService = require("./../service/CreateNewBookmarkService");
 const readBookmarkService = require("./../service/ReadBookmarkService");
+const deleteBookmarkService = require("./../service/DeleteBookmarkService");
 
 exports.index = (req, res) => {
     let categories = req.query.categories;
@@ -13,4 +14,8 @@ exports.index = (req, res) => {
 
 exports.storeOne = (req, res) => {
     createNewBookmarkService.createOne(req.body, res);
+};
+
+exports.deleteOne = (req, res) => {
+    deleteBookmarkService.deleteOne(req.body, res);
 };
