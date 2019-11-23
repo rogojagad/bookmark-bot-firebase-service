@@ -3,5 +3,5 @@ module.exports = {
     notFound: 404,
     forbidden: 403,
     badRequest: 400,
-    internalServerError: 500,
-}
+    internalServerError: 500
+};

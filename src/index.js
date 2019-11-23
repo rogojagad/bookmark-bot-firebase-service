@@ -1,17 +1,17 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.disable('etag');
+app.disable("etag");
 
-const routes = require('./routes/api/v1/bookmark');
+const routes = require("./routes/api/v1/bookmark");
 
-app.use('/api/v1', routes);
+app.use("/api/v1", routes);
 
 app.listen(port, () => {
     console.log(`Server starting on port ${port}`);

@@ -1,4 +1,4 @@
-const responseCollection = require('./../responseStatus')
+const responseCollection = require("./../responseStatus");
 
 exports.transformGetIndex = (bookmarks, metaData, res) => {
     let responseObj = Object();
@@ -18,26 +18,26 @@ exports.transformGetIndex = (bookmarks, metaData, res) => {
     responseObj.data = data;
     responseObj.meta = metaData;
     res.status(responseCollection.ok).json(responseObj);
-}
+};
 
 exports.transformCreateOne = (id, metaData, res) => {
-    let responseObj = Object()
-    let data = Object()
+    let responseObj = Object();
+    let data = Object();
 
-    data.id = id
+    data.id = id;
 
-    responseObj.data = data
-    responseObj.meta = metaData
+    responseObj.data = data;
+    responseObj.meta = metaData;
 
-    res.status(responseCollection.ok).json(responseObj)
-}
+    res.status(responseCollection.ok).json(responseObj);
+};
 
 exports.transformGetByCategories = (results, metaData, res) => {
-    let responseObj = Object()
-    let data = Object()
+    let responseObj = Object();
+    let data = Object();
 
-    responseObj.data = results
-    responseObj.meta = metaData
+    responseObj.data = results;
+    responseObj.meta = metaData;
 
-    res.status(responseCollection.ok).json(responseObj)
-}
+    res.status(responseCollection.ok).json(responseObj);
+};
