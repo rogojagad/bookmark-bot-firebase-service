@@ -15,10 +15,10 @@ describe("createOne", () => {
         description: "description"
     };
 
-    test("should call bookmark repository and create meta data service", async () => {
-        let ref = { id: "id1" };
-        let metaData = { count: 1 };
+    const ref = { id: "id1" };
+    const metaData = { count: 1 };
 
+    test("should call bookmark repository and create meta data service", async () => {
         bookmarkRepository.createOne.mockReturnValueOnce(ref);
         buildMetaDataService.buildCountMetaData.mockReturnValueOnce(metaData);
 
