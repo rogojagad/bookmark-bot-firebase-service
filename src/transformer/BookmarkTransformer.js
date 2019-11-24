@@ -17,7 +17,7 @@ exports.transformGetIndex = (bookmarks, metaData, res) => {
 
     responseObj.data = data;
     responseObj.meta = metaData;
-    res.status(responseCollection.ok).json(responseObj);
+    return res.status(responseCollection.ok).json(responseObj);
 };
 
 exports.transformCreateOne = (id, metaData, res) => {
@@ -29,7 +29,7 @@ exports.transformCreateOne = (id, metaData, res) => {
     responseObj.data = data;
     responseObj.meta = metaData;
 
-    res.status(responseCollection.ok).json(responseObj);
+    return res.status(responseCollection.ok).json(responseObj);
 };
 
 exports.transformGetByCategories = (results, metaData, res) => {
@@ -38,7 +38,7 @@ exports.transformGetByCategories = (results, metaData, res) => {
     responseObj.data = results;
     responseObj.meta = metaData;
 
-    res.status(responseCollection.ok).json(responseObj);
+    return res.status(responseCollection.ok).json(responseObj);
 };
 
 exports.transformDeleteOne = (metaData, res, status) => {
@@ -50,5 +50,5 @@ exports.transformDeleteOne = (metaData, res, status) => {
     responseObj.data = data;
     responseObj.meta = metaData;
 
-    res.status(responseCollection.ok).json(responseObj);
+    return res.status(responseCollection.ok).json(responseObj);
 };

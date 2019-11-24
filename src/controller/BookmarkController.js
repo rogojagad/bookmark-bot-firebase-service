@@ -9,13 +9,13 @@ exports.index = (req, res) => {
         readBookmarkService.readByCategories(categories, res);
     }
 
-    readBookmarkService.readAll(res);
+    return readBookmarkService.readAll(res);
 };
 
 exports.storeOne = (req, res) => {
-    createNewBookmarkService.createOne(req.body, res);
+    return createNewBookmarkService.createOne(req.body, res);
 };
 
 exports.deleteOne = (req, res) => {
-    deleteBookmarkService.deleteOne(req.body, res);
+    return deleteBookmarkService.deleteOne(req.body, res);
 };

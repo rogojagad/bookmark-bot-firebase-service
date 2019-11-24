@@ -1,13 +1,10 @@
-const db = require("./../entity/Firebase");
 const transformer = require("./../transformer/BookmarkTransformer");
 const buildMetaDataService = require("./../service/BuildMetaDataService");
+const bookmarkRepository = require("./../repository/BookmarkRepository");
 
-exports.createOne = (data, res) => {
-    db.collection("sites")
-        .add(data)
-        .then(ref => {
-            let metaData = buildMetaDataService.buildCountMetaData(1);
+exports.createOne = async (data, res) => {
+    let ref = await bookmarkRepository.createOne(data);
+    let metaData = buildMetaDataService.buildCountMetaData(1);
 
-            transformer.transformCreateOne(ref.id, metaData, res);
-        });
+    return transformer.transformCreateOne(ref.id, metaData, res);
 };

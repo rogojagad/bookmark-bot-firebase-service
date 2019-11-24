@@ -1,33 +1,19 @@
-const db = require("./../entity/Firebase");
 const transformer = require("./../transformer/BookmarkTransformer");
 const buildMetaDataService = require("./../service/BuildMetaDataService");
+const bookmarkRepository = require("./../repository/BookmarkRepository");
 
-exports.deleteOne = (data, res) => {
-    db.collection("sites")
-        .doc(data.id)
-        .get()
-        .then(bookmark => {
-            if (bookmark.exists) {
-                db.collection("sites")
-                    .doc(data.id)
-                    .delete()
-                    .then(() => {
-                        let metaData = buildMetaDataService.buildDeleteOneMetaData(
-                            data.id
-                        );
+exports.deleteOne = async (data, res) => {
+    let bookmark = await bookmarkRepository.readOneById(data.id);
 
-                        transformer.transformDeleteOne(
-                            metaData,
-                            res,
-                            "success"
-                        );
-                    });
-            } else {
-                let metaData = buildMetaDataService.buildDeleteOneMetaData(
-                    data.id
-                );
+    if (bookmark.exists) {
+        await bookmarkRepository.deleteOneById(data.id);
 
-                transformer.transformDeleteOne(metaData, res, "not found");
-            }
-        });
+        let metaData = buildMetaDataService.buildDeleteOneMetaData(data.id);
+
+        return transformer.transformDeleteOne(metaData, res, "success");
+    } else {
+        let metaData = buildMetaDataService.buildDeleteOneMetaData(data.id);
+
+        return transformer.transformDeleteOne(metaData, res, "not found");
+    }
 };
