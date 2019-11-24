@@ -25,7 +25,7 @@ describe("BookmarkController", () => {
         });
 
         test("category not given should call readBookmarkService#readAll", async () => {
-            readRequest.query.categories = [];
+            readRequest.query.categories = undefined;
 
             await bookmarkController.index(readRequest, {});
 
