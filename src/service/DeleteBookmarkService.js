@@ -12,7 +12,7 @@ exports.deleteOne = (data, res) => {
                     .doc(data.id)
                     .delete()
                     .then(() => {
-                        let metaData = buildMetaDataService.buildDeleteOne(
+                        let metaData = buildMetaDataService.buildDeleteOneMetaData(
                             data.id
                         );
 
@@ -23,7 +23,9 @@ exports.deleteOne = (data, res) => {
                         );
                     });
             } else {
-                let metaData = buildMetaDataService.buildDeleteOne(data.id);
+                let metaData = buildMetaDataService.buildDeleteOneMetaData(
+                    data.id
+                );
 
                 transformer.transformDeleteOne(metaData, res, "not found");
             }
