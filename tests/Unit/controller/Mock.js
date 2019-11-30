@@ -11,4 +11,17 @@ exports.mockControllerRequirement = () => {
     jest.mock("./../../../src/service/DeleteBookmarkService", () => ({
         deleteOne: jest.fn()
     }));
+
+    jest.mock("./../../../src/service/BuildMetaDataService.js", () => ({
+        buildCountMetaData: jest.fn(),
+        buildCountPerCategoryMetaData: jest.fn(),
+        buildDeleteOneMetaData: jest.fn()
+    }));
+
+    jest.mock("./../../../src/transformer/BookmarkTransformer.js", () => ({
+        transformGetIndex: jest.fn(),
+        transformCreateOne: jest.fn(),
+        transformGetByCategories: jest.fn(),
+        transformDeleteOne: jest.fn()
+    }));
 };

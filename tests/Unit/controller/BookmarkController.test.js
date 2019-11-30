@@ -6,6 +6,8 @@ const bookmarkController = require("../../../src/controller/BookmarkController")
 const readBookmarkService = require("../../../src/service/ReadBookmarkService");
 const createNewBookmarkService = require("../../../src/service/CreateNewBookmarkService");
 const deleteBookmarkService = require("../../../src/service/DeleteBookmarkService");
+const buildMetaDataService = require("./../../../src/service/BuildMetaDataService.js");
+const bookmarkTransformer = require("./../../../src/transformer/BookmarkTransformer");
 
 describe("BookmarkController", () => {
     describe("index", () => {
@@ -15,12 +17,26 @@ describe("BookmarkController", () => {
             }
         };
 
+        const readResult = ["item1", "item2"];
+
         test("given category should call readBookmarkService#readByCategories", async () => {
+            readBookmarkService.readByCategories.mockReturnValueOnce(
+                readResult
+            );
+
             await bookmarkController.index(readRequest, {});
 
             expect(readBookmarkService.readByCategories).toHaveBeenCalledWith(
                 readRequest.query.categories,
                 {}
+            );
+
+            expect(
+                buildMetaDataService.buildCountMetaData
+            ).toHaveBeenCalledTimes(1);
+
+            expect(bookmarkTransformer.transformGetIndex).toHaveBeenCalledTimes(
+                1
             );
         });
 

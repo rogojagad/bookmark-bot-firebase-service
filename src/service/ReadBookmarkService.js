@@ -1,21 +1,16 @@
-const transformer = require("./../transformer/BookmarkTransformer");
-const buildMetaDataService = require("./../service/BuildMetaDataService");
 const bookmarkRepository = require("./../repository/BookmarkRepository");
 
-exports.readByCategories = async (categories, res) => {
+exports.readByCategories = async categories => {
     let bookmarks = await bookmarkRepository.readManyByCategories(categories);
     let result = Array();
     bookmarks.forEach(bookmark => {
         result.push(bookmark.data());
     });
-    let metaData = buildMetaDataService.buildCountPerCategoryMetaData(
-        categories,
-        result
-    );
-    return transformer.transformGetByCategories(result, metaData, res);
+
+    return result;
 };
 
-exports.readAll = async res => {
+exports.readAll = async () => {
     let bookmarks = await bookmarkRepository.readAll();
     let result = Array();
 
@@ -23,7 +18,5 @@ exports.readAll = async res => {
         result.push(bookmark.data());
     });
 
-    let metaData = buildMetaDataService.buildCountMetaData(result.length);
-
-    return transformer.transformGetIndex(result, metaData, res);
+    return result;
 };
