@@ -9,21 +9,21 @@ exports.index = async (req, res) => {
     let result = Array();
 
     if (categories) {
-        result = await readBookmarkService.readByCategories(categories, res);
+        result = await readBookmarkService.readByCategories(categories);
 
-        let metaData = buildMetaDataService.buildCountMetaData(result.length);
+        let metaData = buildMetaDataService.buildCountPerCategoryMetaData(
+            categories,
+            result
+        );
 
-        return transformer.transformGetIndex(result, metaData, res);
+        return transformer.transformGetByCategories(result, metaData, res);
     }
 
-    result = await readBookmarkService.readAll(res);
+    result = await readBookmarkService.readAll();
 
-    let metaData = buildMetaDataService.buildCountPerCategoryMetaData(
-        categories,
-        result
-    );
+    let metaData = buildMetaDataService.buildCountMetaData(result.length);
 
-    return transformer.transformGetByCategories(result, metaData, res);
+    return transformer.transformGetIndex(result, metaData, res);
 };
 
 exports.storeOne = async (req, res) => {

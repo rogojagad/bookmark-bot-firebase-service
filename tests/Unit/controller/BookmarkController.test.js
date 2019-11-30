@@ -27,25 +27,34 @@ describe("BookmarkController", () => {
             await bookmarkController.index(readRequest, {});
 
             expect(readBookmarkService.readByCategories).toHaveBeenCalledWith(
-                readRequest.query.categories,
-                {}
+                readRequest.query.categories
             );
 
             expect(
-                buildMetaDataService.buildCountMetaData
+                buildMetaDataService.buildCountPerCategoryMetaData
+            ).toHaveBeenCalledWith(readRequest.query.categories, readResult);
+
+            expect(
+                bookmarkTransformer.transformGetByCategories
             ).toHaveBeenCalledTimes(1);
+        });
+
+        test("category not given should call readBookmarkService#readAll", async () => {
+            readBookmarkService.readAll.mockReturnValueOnce(readResult);
+
+            readRequest.query.categories = undefined;
+
+            await bookmarkController.index(readRequest);
+
+            expect(readBookmarkService.readAll).toHaveBeenCalledTimes(1);
+
+            expect(
+                buildMetaDataService.buildCountMetaData
+            ).toHaveBeenCalledWith(readResult.length);
 
             expect(bookmarkTransformer.transformGetIndex).toHaveBeenCalledTimes(
                 1
             );
-        });
-
-        test("category not given should call readBookmarkService#readAll", async () => {
-            readRequest.query.categories = undefined;
-
-            await bookmarkController.index(readRequest, {});
-
-            expect(readBookmarkService.readAll).toHaveBeenCalledWith({});
         });
     });
 
