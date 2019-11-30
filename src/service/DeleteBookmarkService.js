@@ -1,6 +1,6 @@
 const bookmarkRepository = require("./../repository/BookmarkRepository");
 
-exports.deleteOne = async (data, res) => {
+exports.deleteOne = async data => {
     let bookmark = await bookmarkRepository.readOneById(data.id);
 
     if (bookmark.exists) {
@@ -10,4 +10,10 @@ exports.deleteOne = async (data, res) => {
     }
 
     return "not found";
+};
+
+exports.deleteAll = async () => {
+    let count = await bookmarkRepository.deleteAll();
+
+    return count;
 };

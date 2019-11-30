@@ -41,3 +41,11 @@ exports.deleteOne = async (req, res) => {
 
     return transformer.transformDeleteOne(metaData, res, statusMessage);
 };
+
+exports.deleteAll = async (req, res) => {
+    let count = await deleteBookmarkService.deleteAll();
+
+    let metaData = buildMetaDataService.buildCountMetaData(count);
+
+    return transformer.transformDeleteAll(count, metaData, res);
+};

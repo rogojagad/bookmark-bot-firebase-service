@@ -70,12 +70,22 @@ describe("BookmarkController", () => {
                 storeRequest.body,
                 {}
             );
+
+            expect(
+                buildMetaDataService.buildCountMetaData
+            ).toHaveBeenCalledWith(1);
+
+            expect(bookmarkTransformer.transformGetIndex).toHaveBeenCalledTimes(
+                1
+            );
         });
     });
 
     describe("delete one", () => {
         let deleteRequest = {
-            body: {}
+            body: {
+                id: "1"
+            }
         };
 
         test("should call createNewBookmarkService#createOne", async () => {
@@ -85,6 +95,26 @@ describe("BookmarkController", () => {
                 deleteRequest.body,
                 {}
             );
+
+            expect(
+                buildMetaDataService.buildDeleteOneMetaData
+            ).toHaveBeenCalledWith(deleteRequest.body.id);
+
+            expect(
+                bookmarkTransformer.transformDeleteOne
+            ).toHaveBeenCalledTimes(1);
+        });
+    });
+
+    describe("delete all", () => {
+        test("should call deleteBookmarkService#deleteAll", async () => {
+            await bookmarkController.deleteAll();
+
+            expect(deleteBookmarkService.deleteAll).toHaveBeenCalledTimes(1);
+
+            expect(
+                bookmarkTransformer.transformDeleteAll
+            ).toHaveBeenCalledTimes(1);
         });
     });
 });

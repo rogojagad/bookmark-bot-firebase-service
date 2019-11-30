@@ -28,3 +28,15 @@ exports.deleteOneById = async id => {
         .doc(id)
         .delete();
 };
+
+exports.deleteAll = async () => {
+    let docs = await this.readAll();
+    let count = 0;
+
+    docs.forEach(async bookmark => {
+        count += 1;
+        await this.deleteOneById(bookmark.id);
+    });
+
+    return count;
+};

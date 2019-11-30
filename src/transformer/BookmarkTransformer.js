@@ -52,3 +52,15 @@ exports.transformDeleteOne = (metaData, res, status) => {
 
     return res.status(responseCollection.ok).json(responseObj);
 };
+
+exports.transformDeleteAll = (count, metaData, res) => {
+    let responseObj = Object();
+    let data = Object();
+
+    data.status = "Success";
+
+    responseObj.data = data;
+    responseObj.meta = metaData;
+
+    return res.status(responseCollection.ok).json(responseObj);
+};
