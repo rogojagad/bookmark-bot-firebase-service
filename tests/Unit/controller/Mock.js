@@ -9,7 +9,8 @@ exports.mockControllerRequirement = () => {
     }));
 
     jest.mock("./../../../src/service/DeleteBookmarkService", () => ({
-        deleteOne: jest.fn()
+        deleteOne: jest.fn(),
+        deleteAll: jest.fn()
     }));
 
     jest.mock("./../../../src/service/BuildMetaDataService.js", () => ({
@@ -22,6 +23,7 @@ exports.mockControllerRequirement = () => {
         transformGetIndex: jest.fn(),
         transformCreateOne: jest.fn(),
         transformGetByCategories: jest.fn(),
-        transformDeleteOne: jest.fn()
+        transformDeleteOne: jest.fn(),
+        transformDeleteAll: jest.fn()
     }));
 };

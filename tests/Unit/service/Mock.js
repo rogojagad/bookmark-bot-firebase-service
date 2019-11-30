@@ -4,6 +4,7 @@ exports.mockServiceRequirements = () => {
         readManyByCategories: jest.fn(),
         readOneById: jest.fn(),
         readAll: jest.fn(),
-        deleteOneById: jest.fn()
+        deleteOneById: jest.fn(),
+        deleteAll: jest.fn()
     }));
 };
