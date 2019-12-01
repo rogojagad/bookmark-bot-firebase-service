@@ -6,13 +6,13 @@
     "scripts": {
         "test": "jest --detectOpenHandles",
         "start": "nodemon src/index.js",
-        "test-with-coverage": "jest --coverage && codacy-coverage < ./coverage/lcov.info"
+        "test-with-coverage": "jest && codecov --token=6a90419c-c8e2-4f2c-a3ba-76f9cee26c6b"
     },
     "author": "Rogo Jagad Alit",
     "license": "ISC",
     "dependencies": {
         "body-parser": "^1.19.0",
-        "codacy-coverage": "^3.4.0",
+        "codecov": "^3.6.1",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "faker": "^4.1.0",
