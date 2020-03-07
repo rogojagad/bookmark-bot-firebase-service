@@ -32,6 +32,9 @@
             "/node_modules/",
             "/tests/"
         ],
-        "collectCoverage": true
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "src/**/*.{js,jsx}"
+        ]
     }
 }
