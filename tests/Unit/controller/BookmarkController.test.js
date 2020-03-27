@@ -58,17 +58,21 @@ describe("BookmarkController", () => {
         });
     });
 
-    describe("store one", () => {
+    describe("create one", () => {
         let storeRequest = {
-            body: {}
+            body: {
+                title: "Title 1",
+                description: "Article 1",
+                category: "category 1",
+                url: "https://article.com"
+            }
         };
 
         test("should call createNewBookmarkService#createOne", async () => {
-            await bookmarkController.storeOne(storeRequest, {});
+            await bookmarkController.createOne(storeRequest, {});
 
             expect(createNewBookmarkService.createOne).toHaveBeenCalledWith(
-                storeRequest.body,
-                {}
+                storeRequest.body
             );
 
             expect(
@@ -92,8 +96,7 @@ describe("BookmarkController", () => {
             await bookmarkController.deleteOne(deleteRequest, {});
 
             expect(deleteBookmarkService.deleteOne).toHaveBeenCalledWith(
-                deleteRequest.body,
-                {}
+                deleteRequest.body
             );
 
             expect(
