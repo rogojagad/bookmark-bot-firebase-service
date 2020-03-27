@@ -31,12 +31,15 @@ exports.deleteOneById = async id => {
 
 exports.deleteAll = async () => {
     let docs = await this.readAll();
-    let count = 0;
+    let bookmarkDeletePromises = Array();
 
     docs.forEach(async bookmark => {
-        count += 1;
-        await this.deleteOneById(bookmark.id);
+        bookmarkDeletePromises.push(this.deleteOneById(bookmark.id));
     });
+
+    let count = bookmarkDeletePromises.length;
+
+    await Promise.all(bookmarkDeletePromises);
 
     return count;
 };
