@@ -7,12 +7,17 @@ const bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 app.disable("etag");
 
 const routes = require("./routes/api/v1/bookmark");
 
 app.use("/api/v1", routes);
 
-app.listen(port, () => {
+app.listen(port, err => {
+    if (err) {
+        console.error(err);
+    }
+
     console.log(`Server starting on port ${port}`);
 });

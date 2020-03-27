@@ -3,6 +3,7 @@ const readBookmarkService = require("./../service/ReadBookmarkService");
 const deleteBookmarkService = require("./../service/DeleteBookmarkService");
 const buildMetaDataService = require("./../service/BuildMetaDataService");
 const transformer = require("./../transformer/BookmarkTransformer");
+const expressValidator = require("express-validator");
 
 exports.index = async (req, res) => {
     let categories = req.query.categories;
@@ -26,8 +27,14 @@ exports.index = async (req, res) => {
     return transformer.transformGetIndex(result, metaData, res);
 };
 
-exports.storeOne = async (req, res) => {
-    let id = await createNewBookmarkService.createOne(req.body, res);
+exports.createOne = async (req, res) => {
+    let errors = expressValidator.validationResult(req);
+
+    if (!errors.isEmpty()) {
+        res.status(400).json(errors);
+    }
+
+    let id = await createNewBookmarkService.createOne(req.body);
 
     let metaData = buildMetaDataService.buildCountMetaData(1);
 
@@ -35,7 +42,7 @@ exports.storeOne = async (req, res) => {
 };
 
 exports.deleteOne = async (req, res) => {
-    let statusMessage = await deleteBookmarkService.deleteOne(req.body, res);
+    let statusMessage = await deleteBookmarkService.deleteOne(req.body);
 
     let metaData = buildMetaDataService.buildDeleteOneMetaData(req.body.id);
 
