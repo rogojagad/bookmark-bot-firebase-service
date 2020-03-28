@@ -1,4 +1,4 @@
-const bookmarkRepository = require("./../repository/BookmarkRepository");
+const bookmarkRepository = require("../../repository/BookmarkRepository");
 
 exports.readByCategories = async categories => {
     let bookmarks = await bookmarkRepository.readManyByCategories(categories);

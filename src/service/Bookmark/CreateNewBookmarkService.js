@@ -1,4 +1,4 @@
-const bookmarkRepository = require("./../repository/BookmarkRepository");
+const bookmarkRepository = require("../../repository/BookmarkRepository");
 
 exports.createOne = async data => {
     let ref = await bookmarkRepository.createOne(data);

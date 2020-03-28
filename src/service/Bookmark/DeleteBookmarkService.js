@@ -1,4 +1,4 @@
-const bookmarkRepository = require("./../repository/BookmarkRepository");
+const bookmarkRepository = require("../../repository/BookmarkRepository");
 
 exports.deleteOne = async data => {
     let bookmark = await bookmarkRepository.readOneById(data.id);
