@@ -10,9 +10,11 @@ app.use(bodyParser.json());
 
 app.disable("etag");
 
-const routes = require("./routes/api/v1/bookmark");
+const bookmarkRoutes = require("./routes/api/v1/bookmark");
+const userRoutes = require("./routes/api/v1/user");
 
-app.use("/api/v1", routes);
+app.use("/api/v1/bookmark", bookmarkRoutes);
+app.use("/api/v1/user", userRoutes);
 
 app.listen(port, err => {
     if (err) {
