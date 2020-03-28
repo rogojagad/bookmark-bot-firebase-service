@@ -1,8 +1,9 @@
 const bcrypt = require("bcrypt");
 const userRepository = require("./../../repository/UserRepository");
-const hashSalt = process.env.HASH_SALT;
 
 exports.createOne = async data => {
+    const hashSalt = await bcrypt.genSalt(10);
+    console.log(hashSalt);
     const password = bcrypt.hashSync(data.password, hashSalt);
     const username = data.username;
 

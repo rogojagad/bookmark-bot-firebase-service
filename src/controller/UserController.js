@@ -2,6 +2,7 @@ const authenticateUserService = require("./../service/User/AuthenticateUserServi
 const createUserService = require("./../service/User/CreateUserService");
 const generateTokenService = require("./../service/User/GenerateTokenService");
 const readUserSevice = require("./../service/User/ReadUserService");
+const userTransformer = require("./../transformer/UserTransformer");
 
 exports.authenticate = async (req, res) => {
     const username = req.body.username;
@@ -20,10 +21,9 @@ exports.authenticate = async (req, res) => {
             username: username
         });
 
-        return res.json({ access_token: accessToken });
+        return await userTransformer.transformAuthSucces(accessToken, res);
     } else {
-        const httpStatusCode = message === "password not match" ? 401 : 404;
-        return res.status(httpStatusCode).json({ message: message });
+        return await userTransformer.transformAuthError(message, res);
     }
 };
 
@@ -38,13 +38,11 @@ exports.createOne = async (req, res) => {
 
     const accessToken = generateTokenService.generateAccessToken(user);
 
-    return res.json({ access_token: accessToken });
+    return await userTransformer.transformCreateOne(user, accessToken, res);
 };
 
 exports.readAll = async (_, res) => {
     const results = await readUserSevice.readAll();
 
-    console.log(results);
-
-    return res.json(results);
+    return await userTransformer.transformReadAll(results, res);
 };
