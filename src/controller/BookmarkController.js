@@ -24,7 +24,7 @@ exports.index = async (req, res) => {
 
     let metaData = buildMetaDataService.buildCountMetaData(result.length);
 
-    return transformer.transformGetIndex(result, metaData, res);
+    return await transformer.transformGetIndex(result, metaData, res);
 };
 
 exports.createOne = async (req, res) => {
@@ -38,7 +38,7 @@ exports.createOne = async (req, res) => {
 
     let metaData = buildMetaDataService.buildCountMetaData(1);
 
-    return transformer.transformCreateOne(id, metaData, res);
+    return await transformer.transformCreateOne(id, metaData, res);
 };
 
 exports.deleteOne = async (req, res) => {
@@ -46,13 +46,13 @@ exports.deleteOne = async (req, res) => {
 
     let metaData = buildMetaDataService.buildDeleteOneMetaData(req.body.id);
 
-    return transformer.transformDeleteOne(metaData, res, statusMessage);
+    return await transformer.transformDeleteOne(metaData, res, statusMessage);
 };
 
-exports.deleteAll = async (req, res) => {
+exports.deleteAll = async (_, res) => {
     let count = await deleteBookmarkService.deleteAll();
 
     let metaData = buildMetaDataService.buildCountMetaData(count);
 
-    return transformer.transformDeleteAll(count, metaData, res);
+    return await transformer.transformDeleteAll(count, metaData, res);
 };
