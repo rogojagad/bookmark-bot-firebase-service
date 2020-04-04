@@ -34,11 +34,19 @@ exports.createOne = async (req, res) => {
         res.status(400).json(errors);
     }
 
-    let id = await createNewBookmarkService.createOne(req.body);
+    try {
+        let id = await createNewBookmarkService.createOne(req.body);
 
-    let metaData = buildMetaDataService.buildCountMetaData(1);
+        let metaData = buildMetaDataService.buildCountMetaData(1);
 
-    return await transformer.transformCreateOne(id, metaData, res);
+        return await transformer.transformCreateOne(id, metaData, res);
+    } catch (error) {
+        console.error(error);
+
+        return res.status(409).json({
+            message: `bookmark with URL ${req.body.url} already exists`,
+        });
+    }
 };
 
 exports.deleteOne = async (req, res) => {
