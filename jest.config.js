@@ -4,8 +4,10 @@ module.exports = {
         "/node_modules/",
         "/tests/",
         "/src/middleware/",
-        "/src/routes/"
+        "/src/routes/",
     ],
     collectCoverage: true,
-    collectCoverageFrom: ["src/**/*.{js,jsx}"]
+    collectCoverageFrom: ["src/**/*.{js,jsx}"],
+    coverageDirectory: "<rootDir>/coverage",
+    coverageReporters: ["html", "text"],
 };

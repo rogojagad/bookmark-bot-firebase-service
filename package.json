@@ -5,8 +5,9 @@
     "main": "index.js",
     "scripts": {
         "test": "jest",
+        "test:coverage": "jest --collect-coverage",
         "start": "nodemon src/index.js",
-        "test-with-coverage": "jest && codecov --token=6a90419c-c8e2-4f2c-a3ba-76f9cee26c6b"
+        "test:codecov": "jest && codecov --token=6a90419c-c8e2-4f2c-a3ba-76f9cee26c6b"
     },
     "author": "Rogo Jagad Alit",
     "license": "ISC",
