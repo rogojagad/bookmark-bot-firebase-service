@@ -14,9 +14,9 @@ I implement unit testing (with a bit of Test Driven Development) and clean code 
 
 Because, **learning while developing a project is tons of fun**.
 
-## Tech Stack
+## Library Used
 
-Following are the tech stack I used on this microservice:
+Following are the library I use on this microservice:
 
 -   **Express.js** : A web application framework
 -   **Jest** : A testing framework for unit testing
