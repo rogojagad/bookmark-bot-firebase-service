@@ -1,7 +1,7 @@
 const db = require("./../entity/Firebase");
 
-exports.createOne = async (data) => {
-    return await db.collection("users").doc(data.username).set(data);
+exports.createOne = async (id, data) => {
+    return await db.collection("users").doc(id).set(data);
 };
 
 exports.readAll = async () => {

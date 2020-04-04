@@ -1,10 +1,12 @@
 const bcrypt = require("bcrypt");
+const createHashService = require("./../CreateHashService");
 const userRepository = require("./../../repository/UserRepository");
 
 exports.createOne = async (data) => {
     const username = data.username;
+    const usernameHash = createHashService.create(username);
 
-    if (!(await validateUniqueUsername(username))) {
+    if (!(await validateUniqueUsername(usernameHash))) {
         throw Error("Username already exists");
     }
 
@@ -17,6 +19,7 @@ exports.createOne = async (data) => {
     };
 
     const ref = await userRepository.createOne(
+        usernameHash,
         JSON.parse(JSON.stringify(userData))
     );
 
