@@ -10,7 +10,7 @@ exports.authenticate = async (req, res) => {
 
     const authResult = await authenticateUserService.authenticate({
         username: username,
-        password: password
+        password: password,
     });
 
     const { authenticated, message, userId } = authResult;
@@ -18,7 +18,7 @@ exports.authenticate = async (req, res) => {
     if (authenticated) {
         const accessToken = generateTokenService.generateAccessToken({
             id: userId,
-            username: username
+            username: username,
         });
 
         return await userTransformer.transformAuthSucces(accessToken, res);
@@ -29,16 +29,24 @@ exports.authenticate = async (req, res) => {
 
 exports.createOne = async (req, res) => {
     const username = req.body.username;
-    const id = await createUserService.createOne(req.body);
 
-    const user = {
-        id: id,
-        username: username
-    };
+    try {
+        const id = await createUserService.createOne(req.body);
+        const user = {
+            id: id,
+            username: username,
+        };
 
-    const accessToken = generateTokenService.generateAccessToken(user);
+        const accessToken = generateTokenService.generateAccessToken(user);
 
-    return await userTransformer.transformCreateOne(user, accessToken, res);
+        return await userTransformer.transformCreateOne(user, accessToken, res);
+    } catch (error) {
+        console.error(error);
+
+        return res.status(409).json({
+            message: "username already exists",
+        });
+    }
 };
 
 exports.readAll = async (_, res) => {
