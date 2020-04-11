@@ -1,6 +1,6 @@
 const routes = require("express").Router();
 const auth = require("./../../../middleware/auth");
-const validator = require("../../../validator");
+const validator = require("../../../middleware/validator/bookmark");
 const bookmarkController = require("../../../controller/BookmarkController");
 
 routes.use(auth.validateToken);
