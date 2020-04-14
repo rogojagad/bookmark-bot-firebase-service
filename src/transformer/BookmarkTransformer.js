@@ -1,6 +1,6 @@
 const responseCollection = require("./../responseStatus");
 
-exports.transformGetIndex = (bookmarks, metaData, res) => {
+exports.transformGetIndex = async (bookmarks, metaData, res) => {
     let responseObj = Object();
     let data = Array();
 
@@ -20,7 +20,7 @@ exports.transformGetIndex = (bookmarks, metaData, res) => {
     return res.status(responseCollection.ok).json(responseObj);
 };
 
-exports.transformCreateOne = (id, metaData, res) => {
+exports.transformCreateOne = async (id, metaData, res) => {
     let responseObj = Object();
     let data = Object();
 
@@ -32,7 +32,7 @@ exports.transformCreateOne = (id, metaData, res) => {
     return res.status(responseCollection.ok).json(responseObj);
 };
 
-exports.transformGetByCategories = (results, metaData, res) => {
+exports.transformGetByCategories = async (results, metaData, res) => {
     let responseObj = Object();
 
     responseObj.data = results;
@@ -41,7 +41,7 @@ exports.transformGetByCategories = (results, metaData, res) => {
     return res.status(responseCollection.ok).json(responseObj);
 };
 
-exports.transformDeleteOne = (metaData, res, status) => {
+exports.transformDeleteOne = async (metaData, res, status) => {
     let responseObj = Object();
     let data = Object();
 
@@ -53,7 +53,7 @@ exports.transformDeleteOne = (metaData, res, status) => {
     return res.status(responseCollection.ok).json(responseObj);
 };
 
-exports.transformDeleteAll = (count, metaData, res) => {
+exports.transformDeleteAll = async (count, metaData, res) => {
     let responseObj = Object();
     let data = Object();
 

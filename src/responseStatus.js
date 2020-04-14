@@ -1,7 +1,9 @@
 module.exports = {
-    ok: 200,
-    notFound: 404,
-    forbidden: 403,
     badRequest: 400,
-    internalServerError: 500
+    created: 201,
+    forbidden: 403,
+    internalServerError: 500,
+    notFound: 404,
+    ok: 200,
+    unauthorized: 401
 };

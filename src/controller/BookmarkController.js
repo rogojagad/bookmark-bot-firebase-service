@@ -1,8 +1,9 @@
-const createNewBookmarkService = require("./../service/CreateNewBookmarkService");
-const readBookmarkService = require("./../service/ReadBookmarkService");
-const deleteBookmarkService = require("./../service/DeleteBookmarkService");
+const createNewBookmarkService = require("./../service/Bookmark/CreateNewBookmarkService");
+const readBookmarkService = require("./../service/Bookmark/ReadBookmarkService");
+const deleteBookmarkService = require("./../service/Bookmark/DeleteBookmarkService");
 const buildMetaDataService = require("./../service/BuildMetaDataService");
 const transformer = require("./../transformer/BookmarkTransformer");
+const expressValidator = require("express-validator");
 
 exports.index = async (req, res) => {
     let categories = req.query.categories;
@@ -23,29 +24,43 @@ exports.index = async (req, res) => {
 
     let metaData = buildMetaDataService.buildCountMetaData(result.length);
 
-    return transformer.transformGetIndex(result, metaData, res);
+    return await transformer.transformGetIndex(result, metaData, res);
 };
 
-exports.storeOne = async (req, res) => {
-    let id = await createNewBookmarkService.createOne(req.body, res);
+exports.createOne = async (req, res) => {
+    let errors = expressValidator.validationResult(req);
 
-    let metaData = buildMetaDataService.buildCountMetaData(1);
+    if (!errors.isEmpty()) {
+        res.status(400).json(errors);
+    }
 
-    return transformer.transformCreateOne(id, metaData, res);
+    try {
+        let id = await createNewBookmarkService.createOne(req.body);
+
+        let metaData = buildMetaDataService.buildCountMetaData(1);
+
+        return await transformer.transformCreateOne(id, metaData, res);
+    } catch (error) {
+        console.error(error);
+
+        return res.status(409).json({
+            message: `bookmark with URL ${req.body.url} already exists`,
+        });
+    }
 };
 
 exports.deleteOne = async (req, res) => {
-    let statusMessage = await deleteBookmarkService.deleteOne(req.body, res);
+    let statusMessage = await deleteBookmarkService.deleteOne(req.body);
 
     let metaData = buildMetaDataService.buildDeleteOneMetaData(req.body.id);
 
-    return transformer.transformDeleteOne(metaData, res, statusMessage);
+    return await transformer.transformDeleteOne(metaData, res, statusMessage);
 };
 
-exports.deleteAll = async (req, res) => {
+exports.deleteAll = async (_, res) => {
     let count = await deleteBookmarkService.deleteAll();
 
     let metaData = buildMetaDataService.buildCountMetaData(count);
 
-    return transformer.transformDeleteAll(count, metaData, res);
+    return await transformer.transformDeleteAll(count, metaData, res);
 };

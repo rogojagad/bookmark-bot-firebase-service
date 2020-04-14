@@ -3,9 +3,9 @@ const { mockControllerRequirement } = require("./Mock");
 mockControllerRequirement();
 
 const bookmarkController = require("../../../src/controller/BookmarkController");
-const readBookmarkService = require("../../../src/service/ReadBookmarkService");
-const createNewBookmarkService = require("../../../src/service/CreateNewBookmarkService");
-const deleteBookmarkService = require("../../../src/service/DeleteBookmarkService");
+const readBookmarkService = require("../../../src/service/Bookmark/ReadBookmarkService");
+const createNewBookmarkService = require("../../../src/service/Bookmark/CreateNewBookmarkService");
+const deleteBookmarkService = require("../../../src/service/Bookmark/DeleteBookmarkService");
 const buildMetaDataService = require("./../../../src/service/BuildMetaDataService.js");
 const bookmarkTransformer = require("./../../../src/transformer/BookmarkTransformer");
 
@@ -13,8 +13,8 @@ describe("BookmarkController", () => {
     describe("index", () => {
         let readRequest = {
             query: {
-                categories: ["asdasd"]
-            }
+                categories: ["asdasd"],
+            },
         };
 
         const readResult = ["item1", "item2"];
@@ -58,17 +58,21 @@ describe("BookmarkController", () => {
         });
     });
 
-    describe("store one", () => {
+    describe("create one", () => {
         let storeRequest = {
-            body: {}
+            body: {
+                title: "Title 1",
+                description: "Article 1",
+                category: "category 1",
+                url: "https://article.com",
+            },
         };
 
         test("should call createNewBookmarkService#createOne", async () => {
-            await bookmarkController.storeOne(storeRequest, {});
+            await bookmarkController.createOne(storeRequest, {});
 
             expect(createNewBookmarkService.createOne).toHaveBeenCalledWith(
-                storeRequest.body,
-                {}
+                storeRequest.body
             );
 
             expect(
@@ -84,16 +88,15 @@ describe("BookmarkController", () => {
     describe("delete one", () => {
         let deleteRequest = {
             body: {
-                id: "1"
-            }
+                id: "1",
+            },
         };
 
         test("should call createNewBookmarkService#createOne", async () => {
             await bookmarkController.deleteOne(deleteRequest, {});
 
             expect(deleteBookmarkService.deleteOne).toHaveBeenCalledWith(
-                deleteRequest.body,
-                {}
+                deleteRequest.body
             );
 
             expect(

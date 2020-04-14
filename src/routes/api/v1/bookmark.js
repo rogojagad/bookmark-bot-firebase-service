@@ -1,10 +1,13 @@
 const routes = require("express").Router();
+const auth = require("./../../../middleware/auth");
+const validator = require("../../../middleware/validator/bookmark");
+const bookmarkController = require("../../../controller/BookmarkController");
 
-let bookmarkController = require("../../../controller/BookmarkController");
+routes.use(auth.validateToken);
 
-routes.get("/bookmark", bookmarkController.index);
-routes.post("/bookmark", bookmarkController.storeOne);
-routes.delete("/bookmark", bookmarkController.deleteOne);
-routes.delete("/bookmark/all", bookmarkController.deleteAll);
+routes.get("/", bookmarkController.index);
+routes.post("/", validator.create, bookmarkController.createOne);
+routes.delete("/", bookmarkController.deleteOne);
+routes.delete("/all", bookmarkController.deleteAll);
 
 module.exports = routes;
