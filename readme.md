@@ -10,8 +10,6 @@ This microservice itself will be consumed by 2 clients: **Telegram chatbot** and
 
 I implement unit testing (with a bit of Test Driven Development) and clean code concept (as much as I can and understand) on this project.
 
-Because, **learning while developing a project is tons of fun**.
-
 ## Library Used
 
 Following are the library I use on this microservice:
