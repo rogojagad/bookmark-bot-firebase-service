@@ -17,15 +17,34 @@ exports.authenticate = async (req, res) => {
     const { authenticated, message, userId } = authResult;
 
     if (authenticated) {
-        const accessToken = generateTokenService.generateAccessToken({
+        const tokenData = {
             id: userId,
             username: username,
-        });
+        };
 
-        return await userTransformer.transformAuthSucces(accessToken, res);
+        const accessToken = generateTokenService.generateAccessToken(tokenData);
+
+        const refreshToken = generateTokenService.generateRefreshToken(
+            tokenData
+        );
+
+        return await userTransformer.transformAuthSucces(
+            accessToken,
+            refreshToken,
+            res
+        );
     } else {
         return await userTransformer.transformAuthError(message, res);
     }
+};
+
+exports.refreshAccessToken = async (req, res) => {
+    let tokenData = Object.assign({}, req.user);
+    delete tokenData["iat"];
+
+    const accessToken = generateTokenService.generateAccessToken(tokenData);
+
+    return await userTransformer.transformRefreshAccessToken(accessToken, res);
 };
 
 exports.createOne = async (req, res) => {
