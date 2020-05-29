@@ -6,11 +6,9 @@
 
 A simple microservice I used as an interface to interact with Firebase for my **Bookmark Bot** project (_more about this soon on separate repository_). In a short word, **Bookmark Bot** is a simple LINE Chat Bot and a website to save and manage saved link so it can be acessed on any platform.
 
-This microservice itself will be consumed by 2 clients: **LINE chatbot** and **webview admin panel**.
+This microservice itself will be consumed by 2 clients: **Telegram chatbot** and **webview admin panel**.
 
 I implement unit testing (with a bit of Test Driven Development) and clean code concept (as much as I can and understand) on this project.
-
-Because, **learning while developing a project is tons of fun**.
 
 ## Library Used
 
