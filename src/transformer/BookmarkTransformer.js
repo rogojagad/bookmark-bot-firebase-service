@@ -7,10 +7,11 @@ exports.transformGetIndex = async (bookmarks, metaData, res) => {
     for (let bookmark of bookmarks) {
         let temp = Object();
 
-        temp.title = bookmark.title;
-        temp.description = bookmark.description;
-        temp.url = bookmark.url;
         temp.category = bookmark.category;
+        temp.description = bookmark.description;
+        temp.id = bookmark.id;
+        temp.title = bookmark.title;
+        temp.url = bookmark.url;
 
         data.push(temp);
     }

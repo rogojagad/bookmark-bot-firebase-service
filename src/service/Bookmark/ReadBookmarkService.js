@@ -15,7 +15,7 @@ exports.readAll = async () => {
     let result = Array();
 
     bookmarks.forEach(bookmark => {
-        result.push(bookmark.data());
+        result.push({id: bookmark.id, ...bookmark.data()});
     });
 
     return result;
