@@ -11,9 +11,9 @@ exports.createOne = async (data) => {
 
     delete data["url"];
 
-    const ref = await bookmarkRepository.createOne(id, { ...data, url: url });
+    await bookmarkRepository.createOne(id, { ...data, url: url });
 
-    return ref.id;
+    return id;
 };
 
 const validateUniqueBookmarkUrl = async (urlHash) => {
