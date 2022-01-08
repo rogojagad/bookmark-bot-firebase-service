@@ -1,5 +1,5 @@
-const createHashService = require("./../CreateHashService");
-const bookmarkRepository = require("../../repository/BookmarkRepository");
+const createHashService = require('./../CreateHashService');
+const bookmarkRepository = require('../../repository/BookmarkRepository');
 
 exports.createOne = async (data) => {
     const url = data.url.trim();
@@ -9,9 +9,9 @@ exports.createOne = async (data) => {
         throw Error(`Boookmark with URL ${url} already exists`);
     }
 
-    delete data["url"];
+    delete data['url'];
 
-    await bookmarkRepository.createOne(id, { ...data, url: url });
+    await bookmarkRepository.createOne(id, { ...data, url });
 
     return id;
 };

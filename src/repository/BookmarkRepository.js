@@ -1,25 +1,26 @@
-const db = require("./../entity/Firebase");
+const db = require('./../entity/Firebase');
+const collectionName = 'sites';
 
 exports.createOne = async (id, data) => {
-    return db.collection("sites").doc(id).set(data);
+    return db.collection(collectionName).doc(id).set(data);
 };
 
 exports.readManyByCategories = async (categories) => {
-    return db.collection("sites").where("category", "in", categories).get();
+    return db.collection(collectionName).where('category', 'in', categories).get();
 };
 
 exports.readOneById = async (id) => {
-    const bookmark = await db.collection("sites").doc(id).get();
+    const bookmark = await db.collection(collectionName).doc(id).get();
 
     return bookmark.exists ? bookmark : undefined;
 };
 
 exports.readAll = async () => {
-    return db.collection("sites").get();
+    return db.collection(collectionName).get();
 };
 
 exports.deleteOneById = async (id) => {
-    return db.collection("sites").doc(id).delete();
+    return db.collection(collectionName).doc(id).delete();
 };
 
 exports.deleteAll = async () => {

@@ -1,16 +1,16 @@
-const { check } = require("express-validator");
+const { check } = require('express-validator');
 
 exports.create = [
-    check("title")
+    check('title')
         .exists()
         .isString(),
-    check("description")
+    check('description')
         .exists()
         .isString(),
-    check("category")
+    check('category')
         .exists()
         .isString(),
-    check("url")
+    check('url')
         .exists()
         .isURL()
 ];

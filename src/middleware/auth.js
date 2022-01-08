@@ -1,13 +1,13 @@
-const jwt = require("jsonwebtoken");
-const responseCollection = require("./../responseStatus");
+const jwt = require('jsonwebtoken');
+const responseCollection = require('./../responseStatus');
 
 exports.validateAccessToken = (req, res, next) => {
-    const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1];
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
     if (token === undefined)
         return res.status(responseCollection.unauthorized).json({
-            message: "token not found",
-            name: "TokenNotFoundError",
+            message: 'token not found',
+            name: 'TokenNotFoundError',
         });
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
@@ -22,12 +22,12 @@ exports.validateAccessToken = (req, res, next) => {
 };
 
 exports.validateRefreshToken = (req, res, next) => {
-    const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1];
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
     if (token === undefined)
         return res.status(responseCollection.unauthorized).json({
-            message: "token not found",
-            name: "TokenNotFoundError",
+            message: 'token not found',
+            name: 'TokenNotFoundError',
         });
 
     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {

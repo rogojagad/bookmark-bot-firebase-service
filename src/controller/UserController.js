@@ -1,9 +1,9 @@
-const authenticateUserService = require("./../service/User/AuthenticateUserService");
-const createUserService = require("./../service/User/CreateUserService");
-const generateTokenService = require("./../service/User/GenerateTokenService");
-const readUserSevice = require("./../service/User/ReadUserService");
-const userTransformer = require("./../transformer/UserTransformer");
-const expressValidator = require("express-validator");
+const authenticateUserService = require('./../service/User/AuthenticateUserService');
+const createUserService = require('./../service/User/CreateUserService');
+const generateTokenService = require('./../service/User/GenerateTokenService');
+const readUserSevice = require('./../service/User/ReadUserService');
+const userTransformer = require('./../transformer/UserTransformer');
+const expressValidator = require('express-validator');
 
 exports.authenticate = async (req, res) => {
     const username = req.body.username;
@@ -40,7 +40,7 @@ exports.authenticate = async (req, res) => {
 
 exports.refreshAccessToken = async (req, res) => {
     let tokenData = Object.assign({}, req.user);
-    delete tokenData["iat"];
+    delete tokenData['iat'];
 
     const accessToken = generateTokenService.generateAccessToken(tokenData);
 
@@ -70,7 +70,7 @@ exports.createOne = async (req, res) => {
         console.error(error);
 
         return res.status(409).json({
-            message: "username already exists",
+            message: 'username already exists',
         });
     }
 };

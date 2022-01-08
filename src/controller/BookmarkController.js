@@ -6,13 +6,13 @@ const transformer = require("./../transformer/BookmarkTransformer");
 const expressValidator = require("express-validator");
 
 exports.index = async (req, res) => {
-    let categories = req.query.categories;
+    const categories = req.query.categories;
     let result = Array();
 
     if (categories) {
         result = await readBookmarkService.readByCategories(categories);
 
-        let metaData = buildMetaDataService.buildCountPerCategoryMetaData(
+        const metaData = buildMetaDataService.buildCountPerCategoryMetaData(
             categories,
             result
         );
@@ -22,22 +22,22 @@ exports.index = async (req, res) => {
 
     result = await readBookmarkService.readAll();
 
-    let metaData = buildMetaDataService.buildCountMetaData(result.length);
+    const metaData = buildMetaDataService.buildCountMetaData(result.length);
 
     return await transformer.transformGetIndex(result, metaData, res);
 };
 
 exports.createOne = async (req, res) => {
-    let errors = expressValidator.validationResult(req);
+    const errors = expressValidator.validationResult(req);
 
     if (!errors.isEmpty()) {
         res.status(400).json(errors);
     }
 
     try {
-        let id = await createNewBookmarkService.createOne(req.body);
+        const id = await createNewBookmarkService.createOne(req.body);
 
-        let metaData = buildMetaDataService.buildCountMetaData(1);
+        const metaData = buildMetaDataService.buildCountMetaData(1);
 
         return await transformer.transformCreateOne(id, metaData, res);
     } catch (error) {
@@ -50,17 +50,17 @@ exports.createOne = async (req, res) => {
 };
 
 exports.deleteOne = async (req, res) => {
-    let statusMessage = await deleteBookmarkService.deleteOne(req.body);
+    const statusMessage = await deleteBookmarkService.deleteOne(req.body);
 
-    let metaData = buildMetaDataService.buildDeleteOneMetaData(req.body.id);
+    const metaData = buildMetaDataService.buildDeleteOneMetaData(req.body.id);
 
     return await transformer.transformDeleteOne(metaData, res, statusMessage);
 };
 
 exports.deleteAll = async (_, res) => {
-    let count = await deleteBookmarkService.deleteAll();
+    const count = await deleteBookmarkService.deleteAll();
 
-    let metaData = buildMetaDataService.buildCountMetaData(count);
+    const metaData = buildMetaDataService.buildCountMetaData(count);
 
     return await transformer.transformDeleteAll(count, metaData, res);
 };

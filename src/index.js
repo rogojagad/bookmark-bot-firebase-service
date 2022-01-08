@@ -12,9 +12,11 @@ app.use(bodyParser.json());
 
 app.disable("etag");
 
+const categoryRoutes = require("./routes/api/v1/category");
 const bookmarkRoutes = require("./routes/api/v1/bookmark");
 const userRoutes = require("./routes/api/v1/user");
 
+app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/bookmark", bookmarkRoutes);
 app.use("/api/v1/user", userRoutes);
 
