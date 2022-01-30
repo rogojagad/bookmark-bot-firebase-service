@@ -1,4 +1,4 @@
-const responseStatus = require("./../responseStatus");
+const responseStatus = require('./../responseStatus');
 
 exports.transformGetIndex = async (bookmarks, metaData, res) => {
     let responseObj = Object();
@@ -58,7 +58,7 @@ exports.transformDeleteAll = async (count, metaData, res) => {
     let responseObj = Object();
     let data = Object();
 
-    data.status = "Success";
+    data.status = 'Success';
 
     responseObj.data = data;
     responseObj.meta = metaData;

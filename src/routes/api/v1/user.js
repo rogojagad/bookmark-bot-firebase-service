@@ -1,7 +1,8 @@
 const routes = require('express').Router();
 const userController = require('./../../../controller/UserController');
 const auth = require('./../../../middleware/auth');
-const validator = require('./../../../middleware/validator/user');
+const { validate } = require('../../../middleware/requestValidator');
+const { createUserPayload } = require('../../../schema/user');
 
 routes.get('/', auth.validateAccessToken, userController.readAll);
 routes.get(
@@ -9,7 +10,7 @@ routes.get(
     auth.validateRefreshToken,
     userController.refreshAccessToken
 );
-routes.post('/', validator.create, userController.createOne);
+routes.post('/', validate(createUserPayload), userController.createOne);
 routes.post('/auth', userController.authenticate);
 
 module.exports = routes;

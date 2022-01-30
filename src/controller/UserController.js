@@ -3,7 +3,6 @@ const createUserService = require('./../service/User/CreateUserService');
 const generateTokenService = require('./../service/User/GenerateTokenService');
 const readUserSevice = require('./../service/User/ReadUserService');
 const userTransformer = require('./../transformer/UserTransformer');
-const expressValidator = require('express-validator');
 
 exports.authenticate = async (req, res) => {
     const username = req.body.username;
@@ -48,12 +47,6 @@ exports.refreshAccessToken = async (req, res) => {
 };
 
 exports.createOne = async (req, res) => {
-    let errors = expressValidator.validationResult(req);
-
-    if (!errors.isEmpty()) {
-        res.status(400).json(errors);
-    }
-
     const username = req.body.username;
 
     try {

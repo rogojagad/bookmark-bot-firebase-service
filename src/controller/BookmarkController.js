@@ -1,9 +1,8 @@
-const createNewBookmarkService = require("./../service/Bookmark/CreateNewBookmarkService");
-const readBookmarkService = require("./../service/Bookmark/ReadBookmarkService");
-const deleteBookmarkService = require("./../service/Bookmark/DeleteBookmarkService");
-const buildMetaDataService = require("./../service/BuildMetaDataService");
-const transformer = require("./../transformer/BookmarkTransformer");
-const expressValidator = require("express-validator");
+const createNewBookmarkService = require('./../service/Bookmark/CreateNewBookmarkService');
+const readBookmarkService = require('./../service/Bookmark/ReadBookmarkService');
+const deleteBookmarkService = require('./../service/Bookmark/DeleteBookmarkService');
+const buildMetaDataService = require('./../service/BuildMetaDataService');
+const transformer = require('./../transformer/BookmarkTransformer');
 
 exports.index = async (req, res) => {
     const categories = req.query.categories;
@@ -28,12 +27,6 @@ exports.index = async (req, res) => {
 };
 
 exports.createOne = async (req, res) => {
-    const errors = expressValidator.validationResult(req);
-
-    if (!errors.isEmpty()) {
-        res.status(400).json(errors);
-    }
-
     try {
         const id = await createNewBookmarkService.createOne(req.body);
 
