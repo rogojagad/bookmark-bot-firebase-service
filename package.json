@@ -14,8 +14,7 @@
         "http-status-code": "^2.1.0",
         "jest": "^24.9.0",
         "jsonwebtoken": "^8.5.1",
-        "nodemon": "^1.19.4",
-        "supertest": "^4.0.2"
+        "nodemon": "^1.19.4"
     },
     "description": "Firebase service for Bookmark Bot",
     "devDependencies": {
